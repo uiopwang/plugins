@@ -223,6 +223,7 @@ class IosDeviceInfo {
     this.model,
     this.localizedModel,
     this.identifierForVendor,
+    this.identifierForAd,
     this.isPhysicalDevice,
     this.utsname,
   });
@@ -245,6 +246,9 @@ class IosDeviceInfo {
   /// Unique UUID value identifying the current device.
   final String identifierForVendor;
 
+  /// Unique Ad value identifying the current device.
+  final String identifierForAd;
+
   /// `false` if the application is running in a simulator, `true` otherwise.
   final bool isPhysicalDevice;
 
@@ -260,6 +264,7 @@ class IosDeviceInfo {
       model: map['model'],
       localizedModel: map['localizedModel'],
       identifierForVendor: map['identifierForVendor'],
+      identifierForAd: map['identifierForAd'],
       isPhysicalDevice: map['isPhysicalDevice'] == 'true',
       utsname: IosUtsname._fromMap(map['utsname']?.cast<String, dynamic>()),
     );

@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #import "FLTDeviceInfoPlugin.h"
+#import <AdSupport/ASIdentifierManager.h>
 #import <sys/utsname.h>
 
 @implementation FLTDeviceInfoPlugin
@@ -17,6 +18,7 @@
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
   if ([@"getIosDeviceInfo" isEqualToString:call.method]) {
     UIDevice* device = [UIDevice currentDevice];
+    ASIdentifierManager* asIdentifierManager = [ASIdentifierManager sharedManager];
     struct utsname un;
     uname(&un);
 
@@ -27,6 +29,7 @@
       @"model" : [device model],
       @"localizedModel" : [device localizedModel],
       @"identifierForVendor" : [[device identifierForVendor] UUIDString],
+      @"identifierForAd" : [asIdentifierManager.advertisingIdentifier UUIDString],
       @"isPhysicalDevice" : [self isDevicePhysical],
       @"utsname" : @{
         @"sysname" : @(un.sysname),
